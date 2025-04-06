@@ -8,12 +8,12 @@ public class Database {
     }
     public static void add(Entity entity) {
         entity.id = entities.size();
-        entities.add(entity);
+        entities.add(entity.copy());
     }
     public static Entity get(int id) throws EntityNotFoundExeption {
         for (Entity entity : entities) {
             if (entity.id == id) {
-                return entity;
+                return entity.copy();
             }
         }
         throw new EntityNotFoundExeption();
@@ -31,7 +31,7 @@ public class Database {
         for (Entity entity1 : entities) {
             if (entity1.id == entity.id){
                 entities.remove(entity1);
-                entities.add(entity);
+                entities.add(entity.copy());
                 return;
             }
         }
