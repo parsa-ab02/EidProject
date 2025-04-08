@@ -11,7 +11,7 @@ public class Database {
     private static ArrayList<Entity> entities = new ArrayList<>();
     private Database(){
     }
-    public static void add(Entity entity) {
+    public static void add(Entity entity) throws InvalidEntityException{
         if(entity instanceof Trackable){
             Date now = new Date();
             ((Trackable) entity).setCreationDate(now);
@@ -75,5 +75,14 @@ public class Database {
         }else{
             validators.put(entityCode, validator);
         }
+    }
+    public static ArrayList<Entity> getAll(int entityCode) {
+        ArrayList<Entity> results = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity.getEntityCode() == entityCode) {
+                results.add(entity.copy());
+            }
+        }
+        return results;
     }
 }
